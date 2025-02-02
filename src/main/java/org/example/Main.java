@@ -94,10 +94,9 @@ public class Main {
                 @Override
                 public void coGroup(Iterable<Tuple2<String, String>> streamARecords, Iterable<Tuple2<String, String>> streamBRecords, Collector<String> out) {
                     if (!streamBRecords.iterator().hasNext()) {
-                        // No match found for the TagB, log and wait for a possible late match
                         for (Tuple2<String, String> record : streamARecords) {
                             LOG.info("Missing mapping for TagB: {}", record.f0);
-                            out.collect(record.f1); // Collect the payload with the missing TagB
+                            out.collect(record.f1);
                         }
                     }
                 }
