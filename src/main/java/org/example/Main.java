@@ -86,8 +86,8 @@ public class Main {
 
         // doing cogroup operation for non enriched data
         DataStream<String> notMatchedData = parsedStreamA.coGroup(parsedStreamB)
-            .where(tuple -> tuple.f0) // Join on TagB value from streamA
-            .equalTo(tuple -> tuple.f0) // Key from streamB
+            .where(tuple -> tuple.f0)
+            .equalTo(tuple -> tuple.f0)
             .window(EventTimeSessionWindows.withGap(Time.minutes(30)))
             .trigger(ProcessingTimeTrigger.create())
             .apply(new CoGroupFunction<Tuple2<String, String>, Tuple2<String, String>, String>() {
